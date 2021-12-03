@@ -66,17 +66,34 @@ fn day2() {
 fn generate_new_num(nums: &Vec<Vec<u32>>, gamma: bool) -> u64 {
     let rows = nums.len();
     let columns = nums[0].len();
+    let floor: u32 = (rows / 2).try_into().unwrap();
+    let mut bit_string = String::from("");
+    for col_num in 0..columns {
+        let count = nums.iter().fold(0, |count, row| count + row[col_num]);
+        let bit_char = match (count, gamma) {
+            (value, true) if value > floor => '1',
+            (value, false) if value <= floor => '1',
+            _ => '0',
+        };
+        bit_string.push(bit_char);
+    }
     println!(
-        "r: {}, c: {}, g: {}, RR: {:?}",
-        rows, columns, gamma, nums[0]
+        "r: {}, c: {}, g: {}, RR: {:?},C: {}, bs: {}",
+        rows, columns, gamma, nums[0], floor, bit_string
     );
-    return 75;
+    return u64::from_str_radix(bit_string.as_str(), 2).unwrap();
 }
 
 fn day3() {
     let binaries = get_binaries("data/binaries.txt").unwrap();
     let new_num = generate_new_num(&binaries, true);
     let new_num_reverse = generate_new_num(&binaries, false);
+    println!(
+        "{} _ {} - {}",
+        new_num,
+        new_num_reverse,
+        new_num * new_num_reverse
+    );
 }
 
 fn main() {
