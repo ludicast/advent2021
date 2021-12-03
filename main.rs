@@ -1,5 +1,5 @@
 mod util;
-use util::{get_directions, get_nums};
+use util::{get_binaries, get_directions, get_nums};
 
 // Revision to be less iterative
 fn count_increases(nums: &Vec<i64>) -> usize {
@@ -63,8 +63,25 @@ fn day2() {
     println!("POS {} {} {} {}", x_coord, y_coord, aim, x_coord * y_coord);
 }
 
+fn generate_new_num(nums: &Vec<Vec<u32>>, gamma: bool) -> u64 {
+    let rows = nums.len();
+    let columns = nums[0].len();
+    println!(
+        "r: {}, c: {}, g: {}, RR: {:?}",
+        rows, columns, gamma, nums[0]
+    );
+    return 75;
+}
+
+fn day3() {
+    let binaries = get_binaries("data/binaries.txt").unwrap();
+    let new_num = generate_new_num(&binaries, true);
+    let new_num_reverse = generate_new_num(&binaries, false);
+}
+
 fn main() {
     day1();
     day2();
+    day3();
     println!("on track!");
 }
