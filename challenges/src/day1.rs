@@ -22,7 +22,7 @@ fn count_window_increases(nums: &Vec<i64>) -> usize {
 }
 
 pub fn day1() {
-    let nums = get_nums("data/nums.txt").unwrap();
+    let nums = get_nums("data/nums.txt");
     let increases = count_increases(&nums);
     assert!(increases == 1616);
     let window_increases = count_window_increases(&nums);

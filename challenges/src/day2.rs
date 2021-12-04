@@ -25,7 +25,7 @@ fn aimed_location_position(moves: &Vec<(String, i64)>) -> (i64, i64, i64) {
 }
 
 pub fn day2() {
-    let directions = get_directions("data/directions.txt").unwrap();
+    let directions = get_directions("data/directions.txt");
     let (x_coord, y_coord) = location_position(&directions);
     println!("POS {} {} {}", x_coord, y_coord, x_coord * y_coord);
     let (x_coord, y_coord, aim) = aimed_location_position(&directions);

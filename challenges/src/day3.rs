@@ -61,7 +61,7 @@ fn generate_winning_num(nums: &Vec<Vec<u32>>, gamma: bool) -> u64 {
 }
 
 pub fn day3() {
-    let binaries = get_binaries("data/binaries.txt").unwrap();
+    let binaries = get_binaries("data/binaries.txt");
     let new_num = generate_new_num(&binaries, true);
     let new_num_reverse = generate_new_num(&binaries, false);
     println!("{:?}", new_num * new_num_reverse);

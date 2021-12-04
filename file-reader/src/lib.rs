@@ -12,7 +12,7 @@ pub fn get_lines(filename: &str) -> Vec<String> {
         .collect::<Vec<String>>()
 }
 
-pub fn get_nums(filename: &str) -> io::Result<Vec<i64>> {
+pub fn get_nums(filename: &str) -> Vec<i64> {
     let mut nums: Vec<i64> = Vec::new();
     let lines = get_lines(filename);
 
@@ -20,10 +20,10 @@ pub fn get_nums(filename: &str) -> io::Result<Vec<i64>> {
         let num: i64 = line.parse().unwrap();
         nums.push(num);
     }
-    return Ok(nums);
+    return nums;
 }
 
-pub fn get_directions(filename: &str) -> io::Result<Vec<(String, i64)>> {
+pub fn get_directions(filename: &str) -> Vec<(String, i64)> {
     let mut res: Vec<(String, i64)> = Vec::new();
     let lines = get_lines(filename);
 
@@ -35,14 +35,14 @@ pub fn get_directions(filename: &str) -> io::Result<Vec<(String, i64)>> {
 
         res.push((direction, num));
     }
-    return Ok(res);
+    return res;
 }
 
-pub fn get_bingos(filename: &str) -> io::Result<Vec<(String, i64)>> {
+pub fn get_bingos(filename: &str) -> Vec<(String, i64)> {
     get_directions(filename)
 }
 
-pub fn get_binaries(filename: &str) -> io::Result<Vec<Vec<u32>>> {
+pub fn get_binaries(filename: &str) -> Vec<Vec<u32>> {
     let mut nums: Vec<Vec<u32>> = Vec::new();
     let lines = get_lines(filename);
 
@@ -59,7 +59,7 @@ pub fn get_binaries(filename: &str) -> io::Result<Vec<Vec<u32>>> {
                 .collect(),
         );
     }
-    return Ok(nums);
+    return nums;
 }
 
 #[cfg(test)]
