@@ -1,5 +1,4 @@
-mod util;
-use util::{get_binaries, get_directions, get_nums};
+use file_reader::{get_binaries, get_directions, get_nums};
 
 // Revision to be less iterative
 fn count_increases(nums: &Vec<i64>) -> usize {
@@ -23,7 +22,7 @@ fn count_window_increases(nums: &Vec<i64>) -> usize {
     count_increases(&transformed)
 }
 
-fn day1() {
+pub fn day1() {
     let nums = get_nums("data/nums.txt").unwrap();
     let increases = count_increases(&nums);
     assert!(increases == 1616);
@@ -55,7 +54,7 @@ fn aimed_location_position(moves: &Vec<(String, i64)>) -> (i64, i64, i64) {
     )
 }
 
-fn day2() {
+pub fn day2() {
     let directions = get_directions("data/directions.txt").unwrap();
     let (x_coord, y_coord) = location_position(&directions);
     println!("POS {} {} {}", x_coord, y_coord, x_coord * y_coord);
@@ -117,18 +116,23 @@ fn generate_winning_num(nums: &Vec<Vec<u32>>, gamma: bool) -> u64 {
     return u64::from_str_radix(bit_string.as_str(), 2).unwrap();
 }
 
-fn day3() {
+pub fn day3() {
     let binaries = get_binaries("data/binaries.txt").unwrap();
     let new_num = generate_new_num(&binaries, true);
     let new_num_reverse = generate_new_num(&binaries, false);
+    println!("{:?}", new_num * new_num_reverse);
     let new_num = generate_winning_num(&binaries, true);
     let new_num_reverse = generate_winning_num(&binaries, false);
     println!("{:?}", new_num * new_num_reverse);
 }
 
-fn main() {
-    // day1();
-    // day2();
-    day3();
-    println!("on track!");
+
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn it_works() {
+        let result = 2 + 2;
+        assert_eq!(result, 4);
+    }
 }

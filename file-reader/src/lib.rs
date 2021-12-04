@@ -57,3 +57,12 @@ pub fn get_binaries(filename: &str) -> io::Result<Vec<Vec<u32>>> {
     }
     return Ok(nums);
 }
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn it_works() {
+        let result = 2 + 2;
+        assert_eq!(result, 4);
+    }
+}

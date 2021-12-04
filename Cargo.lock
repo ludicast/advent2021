@@ -5,3 +5,21 @@ version = 3
 [[package]]
 name = "advent2021"
 version = "0.1.0"
+
+[[package]]
+name = "challenges"
+version = "0.1.0"
+dependencies = [
+ "file-reader",
+]
+
+[[package]]
+name = "cli"
+version = "0.1.0"
+dependencies = [
+ "challenges",
+]
+
+[[package]]
+name = "file-reader"
+version = "0.1.0"
