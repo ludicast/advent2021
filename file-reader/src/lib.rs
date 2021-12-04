@@ -4,12 +4,12 @@ use std::io::{self, BufRead};
 pub fn get_lines(filename: &str) -> Vec<String> {
     let file = File::open(filename).unwrap();
     let lines = io::BufReader::new(file).lines();
-    lines.filter_map(|line|
-        match line {
+    lines
+        .filter_map(|line| match line {
             Ok(line) => Some(line),
-            _ => None
-        }
-    ).collect::<Vec<String>>()
+            _ => None,
+        })
+        .collect::<Vec<String>>()
 }
 
 pub fn get_nums(filename: &str) -> io::Result<Vec<i64>> {
@@ -17,8 +17,8 @@ pub fn get_nums(filename: &str) -> io::Result<Vec<i64>> {
     let lines = get_lines(filename);
 
     for line in lines {
-            let num: i64 = line.parse().unwrap();
-            nums.push(num);
+        let num: i64 = line.parse().unwrap();
+        nums.push(num);
     }
     return Ok(nums);
 }
@@ -28,12 +28,12 @@ pub fn get_directions(filename: &str) -> io::Result<Vec<(String, i64)>> {
     let lines = get_lines(filename);
 
     for line in lines {
-            let split = line.split(" ");
-            let vec: Vec<&str> = split.collect();
-            let direction = String::from(vec[0]);
-            let num: i64 = vec[1].parse().unwrap();
+        let split = line.split(" ");
+        let vec: Vec<&str> = split.collect();
+        let direction = String::from(vec[0]);
+        let num: i64 = vec[1].parse().unwrap();
 
-            res.push((direction, num));
+        res.push((direction, num));
     }
     return Ok(res);
 }
@@ -47,17 +47,17 @@ pub fn get_binaries(filename: &str) -> io::Result<Vec<Vec<u32>>> {
     let lines = get_lines(filename);
 
     for line in lines {
-            let num_string: String = line.parse().unwrap();
-            let num_chars = num_string
-                .split("")
-                .filter(|num_char| *num_char != "")
-                .collect::<Vec<&str>>();
-            nums.push(
-                num_chars
-                    .iter()
-                    .map(|num| if *num == "1" { 1 } else { 0 })
-                    .collect(),
-            );
+        let num_string: String = line.parse().unwrap();
+        let num_chars = num_string
+            .split("")
+            .filter(|num_char| *num_char != "")
+            .collect::<Vec<&str>>();
+        nums.push(
+            num_chars
+                .iter()
+                .map(|num| if *num == "1" { 1 } else { 0 })
+                .collect(),
+        );
     }
     return Ok(nums);
 }

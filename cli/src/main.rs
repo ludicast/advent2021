@@ -1,4 +1,4 @@
-use challenges::{run_challenges};
+use challenges::run_challenges;
 
 pub fn main() {
     run_challenges();

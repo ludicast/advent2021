@@ -1,4 +1,4 @@
-use file_reader::{get_directions};
+use file_reader::get_directions;
 
 fn location_position(moves: &Vec<(String, i64)>) -> (i64, i64) {
     moves.iter().fold(
