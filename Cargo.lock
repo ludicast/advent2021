@@ -3,10 +3,6 @@
 version = 3
 
 [[package]]
-name = "advent2021"
-version = "0.1.0"
-
-[[package]]
 name = "challenges"
 version = "0.1.0"
 dependencies = [

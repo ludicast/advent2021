@@ -1,7 +1,6 @@
-use challenges::{day1, day2, day3};
+use challenges::{run_challenges};
 
-fn main() {
-    day1();
-    day2();
-    day3();
+pub fn main() {
+    run_challenges();
+    println!("leh dh");
 }
