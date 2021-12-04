@@ -38,8 +38,20 @@ pub fn get_directions(filename: &str) -> Vec<(String, i64)> {
     return res;
 }
 
-pub fn get_bingos(filename: &str) -> Vec<(String, i64)> {
-    get_directions(filename)
+pub struct BingoGame {
+    pub balls: Vec<i64>,
+}
+
+pub fn get_bingos(filename: &str) -> BingoGame {
+    let lines = get_lines(filename);
+    let balls = lines[0]
+        .split(",")
+        .map(|num| num.parse::<i64>().unwrap())
+        .collect::<Vec<i64>>();
+
+    BingoGame {
+        balls
+    }
 }
 
 pub fn get_binaries(filename: &str) -> Vec<Vec<u32>> {
