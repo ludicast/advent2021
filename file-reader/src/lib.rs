@@ -48,7 +48,12 @@ pub fn get_bingos(filename: &str) -> BingoGame {
         .split(",")
         .map(|num| num.parse::<i64>().unwrap())
         .collect::<Vec<i64>>();
+    let games_count = (lines.len() - 1) / 6;
 
+    let games: Vec<Vec<Vec<i64>>> = (1..=games_count).map(|game_num| {
+        vec![vec![1,2,3]]
+    }
+    ).collect::<Vec<Vec<Vec<i64>>>>();
     BingoGame {
         balls
     }
