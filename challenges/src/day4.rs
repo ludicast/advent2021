@@ -1,12 +1,8 @@
 use std::collections::HashSet;
 
-use file_reader::{get_bingos, BingoGame, Board};
+use file_reader::{get_bingos};
 
-fn match_first(bingos: &BingoGame) {
-
-}
-
-pub fn day4() {
+pub fn day4_new() {
     let bingos = get_bingos("data/bingos.txt");
 
     let len = bingos.boards.len();
@@ -32,31 +28,6 @@ pub fn day4() {
         }
       }
     }
-    
-   /* 
-
-    println!("{:?}", bingos.balls);
-    for ball in bingos.balls {
-      ball_sack.insert(ball);
-      for  board in boards {
-        if board.has_bingo(ball_sack) {
-          let len = boards.len();
-          if len == 1 {
-            let (v1, v2) = board.matched(ball_sack);
-            println!("{:?}", v2.iter().sum::<i64>() * ball);
-            println!("{:?}:?", ball);
-            return
-          }
-        } else {
-          saved.push(boards);
-        }
-      }
-        boards.retain(|board|
-          saved.contains(&&board.values)
-        );
-    
-    }
-    */
 }
 
 pub fn day4_orig() {
@@ -77,4 +48,11 @@ pub fn day4_orig() {
       }
     
     }
+
 }
+
+    pub fn day4() {
+      day4_orig();
+      day4_new();
+
+    }
