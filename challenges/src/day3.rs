@@ -2,7 +2,6 @@ use file_reader::get_binaries;
 
 fn most_common(nums: &Vec<Vec<u32>>, col_num: usize, gamma: bool) -> u32 {
     let rows: u32 = nums.len().try_into().unwrap();
-    let columns = nums[0].len();
     let low_floor = rows / 2;
     let floor = rows - low_floor;
     let count = nums.iter().fold(0, |count, row| count + row[col_num]);
@@ -22,7 +21,6 @@ fn most_common(nums: &Vec<Vec<u32>>, col_num: usize, gamma: bool) -> u32 {
 }
 
 fn generate_new_num(nums: &Vec<Vec<u32>>, gamma: bool) -> u64 {
-    let rows = nums.len();
     let columns = nums[0].len();
     let mut bit_string = String::from("");
     for col_num in 0..columns {
@@ -37,7 +35,6 @@ fn generate_new_num(nums: &Vec<Vec<u32>>, gamma: bool) -> u64 {
 }
 
 fn generate_winning_num(nums: &Vec<Vec<u32>>, gamma: bool) -> u64 {
-    let rows = nums.len();
     let columns = nums[0].len();
     // let mut bit_string = String::from("");
     let mut nums: Vec<Vec<u32>> = nums.clone();
