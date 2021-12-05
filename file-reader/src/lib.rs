@@ -39,7 +39,6 @@ pub fn get_directions(filename: &str) -> Vec<(String, i64)> {
     return res;
 }
 
-
 #[derive(PartialEq)]
 pub struct Board {
     pub values: Vec<Vec<i64>>,
@@ -54,28 +53,30 @@ impl Board {
                 value_set.insert(*cell);
             }
         }
-        Board {
-            values,
-            value_set,
-        }
+        Board { values, value_set }
     }
 
     fn columns(&self) -> Vec<Vec<i64>> {
         let column_count = self.values.len();
-        (0..column_count).map(| col_num |
-           self.values.iter().map(|row| row[col_num]).collect::<Vec<i64>>()
-        ).collect::<Vec<Vec<i64>>>()
+        (0..column_count)
+            .map(|col_num| {
+                self.values
+                    .iter()
+                    .map(|row| row[col_num])
+                    .collect::<Vec<i64>>()
+            })
+            .collect::<Vec<Vec<i64>>>()
     }
-    
+
     pub fn has_bingo(&self, nums: &mut HashSet<i64>) -> bool {
         for row in &self.values {
             if row.iter().all(|item| nums.contains(item)) {
-                return true
+                return true;
             }
         }
         for col in self.columns() {
             if col.iter().all(|item| nums.contains(item)) {
-                return true
+                return true;
             }
         }
         false
@@ -83,15 +84,23 @@ impl Board {
 
     pub fn matched(&self, nums: &mut HashSet<i64>) -> (Vec<i64>, Vec<i64>) {
         let values = self.values.clone();
-        
-        let matched_cells = values.iter().flat_map(
-            |row|
-            row.iter().filter(|cell| nums.contains(cell)).map(|cell| *cell)
-        ).collect::<Vec<i64>>();
-        let non_matched_cells = values.iter().flat_map(
-            |row|
-            row.iter().filter(|cell| !nums.contains(cell)).map(|cell| *cell)
-        ).collect::<Vec<i64>>();
+
+        let matched_cells = values
+            .iter()
+            .flat_map(|row| {
+                row.iter()
+                    .filter(|cell| nums.contains(cell))
+                    .map(|cell| *cell)
+            })
+            .collect::<Vec<i64>>();
+        let non_matched_cells = values
+            .iter()
+            .flat_map(|row| {
+                row.iter()
+                    .filter(|cell| !nums.contains(cell))
+                    .map(|cell| *cell)
+            })
+            .collect::<Vec<i64>>();
         (matched_cells, non_matched_cells)
     }
 }
@@ -109,27 +118,24 @@ pub fn get_bingos(filename: &str) -> BingoGame {
         .collect::<Vec<i64>>();
     let games_count = (lines.len() - 1) / 6;
 
-    let boards: Vec<Board> = (0..games_count).map(|game_num| {
-        let start = 2 + game_num * 6;
-        let values = (start..start + 5).map(|row_num| {
-            lines[row_num]
-                .split(" ")
-                // some spots are double-spaced, but regex is a 3rd party util
-                .filter(|piece| *piece != "")
-                .map(|num_string| 
-                    
-                    i64::from_str_radix(num_string, 10).unwrap()
-                )
-                .collect::<Vec<i64>>()
-        
-        }).collect::<Vec<Vec<i64>>>() ;
-        Board::new(values)
-    }).collect::<Vec<Board>>();
+    let boards: Vec<Board> = (0..games_count)
+        .map(|game_num| {
+            let start = 2 + game_num * 6;
+            let values = (start..start + 5)
+                .map(|row_num| {
+                    lines[row_num]
+                        .split(" ")
+                        // some spots are double-spaced, but regex is a 3rd party util
+                        .filter(|piece| *piece != "")
+                        .map(|num_string| i64::from_str_radix(num_string, 10).unwrap())
+                        .collect::<Vec<i64>>()
+                })
+                .collect::<Vec<Vec<i64>>>();
+            Board::new(values)
+        })
+        .collect::<Vec<Board>>();
 
-    BingoGame {
-        balls,
-        boards
-    }
+    BingoGame { balls, boards }
 }
 
 pub fn get_binaries(filename: &str) -> Vec<Vec<u32>> {
