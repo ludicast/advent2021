@@ -3,5 +3,6 @@ members = [
     "file-reader",
     "cli",
     "challenges",
+    "util"
 ]
 

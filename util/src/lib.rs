@@ -11,3 +11,12 @@ pub fn read_lines(filename: &str) -> Vec<String> {
         })
         .collect::<Vec<String>>()
 }
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn it_works() {
+        let result = 2 + 2;
+        assert_eq!(result, 4);
+    }
+}

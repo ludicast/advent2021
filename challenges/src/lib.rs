@@ -5,13 +5,11 @@ mod day4;
 mod day5;
 
 pub fn run_challenges() {
-    /*
-    day1::day1();
     day2::day2();
     day3::day3();
     day4::day4();
-    */
     day5::day5();
+    day1::day1();
 }
 
 #[cfg(test)]
