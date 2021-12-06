@@ -7,7 +7,7 @@ pub fn day5() {
     let mut point_counter = HashMap::new();
     let points = vent_lines
         .iter()
-        .flat_map(|line| line.get_non_diagonal_points())
+        .flat_map(|line| line.get_all_points())
         .collect::<Vec<Point>>();
 
     println!("{:?}", points);

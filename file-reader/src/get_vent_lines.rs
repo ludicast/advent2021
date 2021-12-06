@@ -20,11 +20,35 @@ pub struct Line {
     pub point2: Point,
 }
 impl Line {
+    fn is_diagonal(&self) -> bool {
+        self.point1.x != self.point2.x && self.point1.y != self.point2.y
+    }
+
     fn is_horizontal(&self) -> bool {
         self.point1.y == self.point2.y
     }
     fn is_vertical(&self) -> bool {
         self.point1.x == self.point2.x
+    }
+
+    fn diagonal_points(&self) -> Vec<Point> {
+        let first = cmp::min_by(&self.point1, &self.point2, |pt1, pt2| pt1.x.cmp(&pt2.x));
+
+        let second = cmp::max_by(&self.point1, &self.point2, |pt1, pt2| pt1.x.cmp(&pt2.x));
+
+        let upwards = first.y < second.y;
+        (first.x..=second.x)
+            .map(|x| {
+                println!("dkdk");
+                let step = x - first.x;
+                let y = if upwards {
+                    first.y + step
+                } else {
+                    first.y - step
+                };
+                Point { x, y }
+            })
+            .collect()
     }
 
     fn horizontal_points(&self) -> Vec<Point> {
@@ -37,6 +61,7 @@ impl Line {
             })
             .collect()
     }
+
     fn vertical_points(&self) -> Vec<Point> {
         let min_y = cmp::min(self.point1.y, self.point2.y);
         let max_y = cmp::max(self.point1.y, self.point2.y);
@@ -47,6 +72,7 @@ impl Line {
             })
             .collect()
     }
+
     pub fn get_non_diagonal_points(&self) -> Vec<Point> {
         if self.is_horizontal() {
             return self.horizontal_points();
@@ -56,6 +82,13 @@ impl Line {
         }
 
         vec![]
+    }
+
+    pub fn get_all_points(&self) -> Vec<Point> {
+        if self.is_diagonal() {
+            return self.diagonal_points()
+        }
+        self.get_non_diagonal_points()
     }
 }
 
