@@ -100,4 +100,3 @@ pub fn get_bingos(filename: &str) -> BingoGame {
 
     BingoGame { balls, boards }
 }
-
