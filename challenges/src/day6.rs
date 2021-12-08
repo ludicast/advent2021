@@ -13,7 +13,7 @@ fn calculate_lanternfish(mut lanterns: [i64; 9], days: usize) -> i64 {
 }
 
 pub fn day6() {
-    let mut lanterns = get_lanterns("./data/lanterns.txt");
+    let lanterns = get_lanterns("./data/lanterns.txt");
     let sum = calculate_lanternfish(lanterns, 256);
     println!("flts {:?}, sum {}", lanterns, sum);
 
