@@ -64,3 +64,23 @@ pub fn day3() {
     let new_num = generate_winning_num(&binaries, true);
     let new_num_reverse = generate_winning_num(&binaries, false);
 }
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn test_generate_new_num() {
+        let binaries = super::get_binaries("../fixtures/binaries.txt");
+        let new_num = super::generate_new_num(&binaries, true);
+        let new_num_reverse = super::generate_new_num(&binaries, false);
+
+        assert_eq!(new_num * new_num_reverse, 198);
+    }
+
+    #[test]
+    fn test_generate_winning_num() {
+        let binaries = super::get_binaries("../fixtures/binaries.txt");
+        let new_num = super::generate_winning_num(&binaries, true);
+        let new_num_reverse = super::generate_winning_num(&binaries, false);
+        assert_eq!(new_num * new_num_reverse, 230);
+    }
+}

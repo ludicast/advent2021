@@ -9,7 +9,6 @@ mod day8;
 
 pub fn run_challenges() {
     day1::day1();
-    /*
     day2::day2();
     day3::day3();
     day4::day4();
@@ -17,7 +16,6 @@ pub fn run_challenges() {
     day6::day6();
     day7::day7();
     day8::day8();
-    */
 }
 
 #[cfg(test)]

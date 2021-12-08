@@ -29,3 +29,20 @@ pub fn day2() {
     let (x_coord, y_coord) = location_position(&directions);
     let (x_coord, y_coord, aim) = aimed_location_position(&directions);
 }
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn test_location_position() {
+        let directions = super::get_directions("../fixtures/directions.txt");
+        let (x_coord, y_coord) = super::location_position(&directions);
+        assert_eq!(x_coord * y_coord, 150);
+    }
+
+    #[test]
+    fn test_aimed_location_position() {
+        let directions = super::get_directions("../fixtures/directions.txt");
+        let (x_coord, y_coord, _aim) = super::aimed_location_position(&directions);
+        assert_eq!(x_coord * y_coord, 900);
+    }
+}
