@@ -28,3 +28,20 @@ pub fn day1() {
     let window_increases = count_window_increases(&nums);
     assert!(window_increases == 1645);
 }
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn test_count_increases() {
+        let nums = super::get_nums("../fixtures/nums.txt");
+        let increases = super::count_increases(&nums);
+        assert_eq!(increases, 7);
+    }
+
+    #[test]
+    fn test_count_window_increases() {
+        let nums = super::get_nums("../fixtures/nums.txt");
+        let increases = super::count_window_increases(&nums);
+        assert_eq!(increases, 5);
+    }
+}

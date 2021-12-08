@@ -61,8 +61,6 @@ pub fn day3() {
     let binaries = get_binaries("data/binaries.txt");
     let new_num = generate_new_num(&binaries, true);
     let new_num_reverse = generate_new_num(&binaries, false);
-    println!("{:?}", new_num * new_num_reverse);
     let new_num = generate_winning_num(&binaries, true);
     let new_num_reverse = generate_winning_num(&binaries, false);
-    println!("{:?}", new_num * new_num_reverse);
 }

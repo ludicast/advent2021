@@ -15,3 +15,6 @@ pub use get_comma_separated_numbers::{get_lanterns, get_parsed_nums};
 
 mod get_vent_lines;
 pub use get_vent_lines::{get_vent_lines, Point};
+
+mod get_seven_segment_displays;
+pub use get_seven_segment_displays::{get_seven_segment_displays, SevenSegmentDisplay};

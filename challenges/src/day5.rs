@@ -3,14 +3,12 @@ use std::collections::HashMap;
 
 pub fn day5() {
     let vent_lines = get_vent_lines("data/vent-lines.txt");
-    println!("{:?}", vent_lines);
     let mut point_counter = HashMap::new();
     let points = vent_lines
         .iter()
         .flat_map(|line| line.get_all_points())
         .collect::<Vec<Point>>();
 
-    println!("{:?}", points);
     for point in points {
         if let Some(value) = point_counter.get(&point.hash()) {
             point_counter.insert(point.hash(), value + 1);

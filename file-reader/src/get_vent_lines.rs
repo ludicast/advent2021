@@ -39,7 +39,6 @@ impl Line {
         let upwards = first.y < second.y;
         (first.x..=second.x)
             .map(|x| {
-                println!("dkdk");
                 let step = x - first.x;
                 let y = if upwards {
                     first.y + step
@@ -86,7 +85,7 @@ impl Line {
 
     pub fn get_all_points(&self) -> Vec<Point> {
         if self.is_diagonal() {
-            return self.diagonal_points()
+            return self.diagonal_points();
         }
         self.get_non_diagonal_points()
     }
