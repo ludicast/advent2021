@@ -1,16 +1,14 @@
 use util::read_lines;
 
 pub fn get_directions(filename: &str) -> Vec<(String, i64)> {
-    let mut res: Vec<(String, i64)> = Vec::new();
     let lines = read_lines(filename);
 
-    for line in lines {
+    lines.iter().map(|line| {
         let split = line.split(" ");
         let vec: Vec<&str> = split.collect();
         let direction = String::from(vec[0]);
         let num: i64 = vec[1].parse().unwrap();
 
-        res.push((direction, num));
-    }
-    return res;
+        (direction, num)
+    }).collect()
 }
