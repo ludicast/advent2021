@@ -10,11 +10,16 @@ pub use get_bingos::{get_bingos, BingoGame};
 mod get_binaries;
 pub use get_binaries::get_binaries;
 
+mod get_map;
+pub use get_map::get_map;
+
 mod get_comma_separated_numbers;
 pub use get_comma_separated_numbers::{get_lanterns, get_parsed_nums};
 
 mod get_vent_lines;
-pub use get_vent_lines::{get_vent_lines, Point, Line};
+pub use get_vent_lines::{get_vent_lines, Line, Point};
 
 mod get_seven_segment_displays;
-pub use get_seven_segment_displays::{get_seven_segment_displays, SevenSegmentDisplay};
+pub use get_seven_segment_displays::{
+    get_seven_segment_display, get_seven_segment_displays, SevenSegmentDisplay,
+};
