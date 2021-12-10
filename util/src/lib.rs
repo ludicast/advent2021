@@ -12,7 +12,7 @@ pub fn read_lines(filename: &str) -> Vec<String> {
         .collect::<Vec<String>>()
 }
 
-pub fn parse_lines<T>(filename: &str, func: fn(&String) -> Vec<T>) -> Vec<Vec<T>> {
+pub fn parse_lines<T>(filename: &str, func: fn(&String) -> T) -> Vec<T> {
     let lines = read_lines(filename);
     lines.iter().map(func).collect()
 }

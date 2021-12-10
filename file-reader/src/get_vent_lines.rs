@@ -1,6 +1,6 @@
 use std::cmp;
 
-use util::read_lines;
+use util::parse_lines;
 
 #[derive(Debug)]
 pub struct Point {
@@ -104,18 +104,14 @@ pub fn set_to_point(point_string: &str) -> Point {
 }
 
 pub fn get_vent_lines(filename: &str) -> Vec<Line> {
-    let mut vent_lines: Vec<Line> = Vec::new();
-    let lines = read_lines(filename);
-
-    for line in lines {
+    parse_lines(filename, |line| {
         let split = line.split(" -> ");
 
         let start_end: Vec<&str> = split.collect();
         let point1 = set_to_point(start_end[0]);
         let point2 = set_to_point(start_end[1]);
-        vent_lines.push(Line { point1, point2 })
-    }
-    return vent_lines;
+        Line { point1, point2 }
+    })
 }
 
 #[cfg(test)]

@@ -1,4 +1,4 @@
-use util::read_lines;
+use util::parse_lines;
 
 #[derive(Debug)]
 pub struct SevenSegmentDigit {
@@ -24,10 +24,5 @@ pub fn get_seven_segment_display(line: &String) -> SevenSegmentDisplay {
 }
 
 pub fn get_seven_segment_displays(filename: &str) -> Vec<SevenSegmentDisplay> {
-    let lines = read_lines(filename);
-
-    lines
-        .iter()
-        .map(get_seven_segment_display)
-        .collect::<Vec<SevenSegmentDisplay>>()
+    parse_lines(filename, get_seven_segment_display)
 }
