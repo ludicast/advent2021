@@ -12,8 +12,16 @@ fn calculate_lanternfish(mut lanterns: [i64; 9], days: usize) -> i64 {
     lanterns.to_vec().iter().sum()
 }
 
-pub fn day6() {
+pub fn part1() -> i64 {
+    let lanterns = get_lanterns("./data/lanterns.txt");
+    let sum = calculate_lanternfish(lanterns, 80);
+    assert_eq!(sum, 362346);
+    sum
+}
+
+pub fn part2() -> i64 {
     let lanterns = get_lanterns("./data/lanterns.txt");
     let sum = calculate_lanternfish(lanterns, 256);
-    println!("flts {:?}, sum {}", lanterns, sum);
+    assert_eq!(sum, 1639643057051);
+    sum
 }
