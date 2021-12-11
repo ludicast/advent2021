@@ -38,19 +38,26 @@ fn get_straight_points(line: &Line) -> Vec<Point> {
     line.get_non_diagonal_points()
 }
 
-pub fn day5() {
-    let vent_lines = get_vent_lines("data/vent-lines.txt");
-    count_intersection_points(vent_lines, &get_all_points);
-    let vent_lines = get_vent_lines("data/vent-lines.txt");
-    count_intersection_points(vent_lines, &get_straight_points);
-}
-
 pub fn count_all_intersection_points(vent_lines: Vec<Line>) -> i64 {
     count_intersection_points(vent_lines, &get_all_points)
 }
 
 pub fn count_straight_intersection_points(vent_lines: Vec<Line>) -> i64 {
     count_intersection_points(vent_lines, &get_straight_points)
+}
+
+pub fn part1() -> i64 {
+    let vent_lines = get_vent_lines("data/vent-lines.txt");
+    let points = count_straight_intersection_points(vent_lines);
+    assert_eq!(points, 4993);
+    points
+}
+
+pub fn part2() -> i64 {
+    let vent_lines = get_vent_lines("data/vent-lines.txt");
+    let points = count_all_intersection_points(vent_lines);
+    assert_eq!(points, 21101);
+    points
 }
 
 #[cfg(test)]

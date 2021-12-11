@@ -57,12 +57,22 @@ fn generate_winning_num(nums: &Vec<Vec<u32>>, gamma: bool) -> u64 {
     return u64::from_str_radix(bit_string.as_str(), 2).unwrap();
 }
 
-pub fn day3() {
+pub fn part1() -> u64 {
     let binaries = get_binaries("data/binaries.txt");
     let new_num = generate_new_num(&binaries, true);
     let new_num_reverse = generate_new_num(&binaries, false);
+    let consumption = new_num * new_num_reverse;
+    assert_eq!(consumption, 2003336);
+    consumption
+}
+
+pub fn part2() -> u64 {
+    let binaries = get_binaries("data/binaries.txt");
     let new_num = generate_winning_num(&binaries, true);
     let new_num_reverse = generate_winning_num(&binaries, false);
+    let life_support_rating = new_num * new_num_reverse;
+    assert_eq!(life_support_rating, 1877139);
+    life_support_rating
 }
 
 #[cfg(test)]

@@ -1,4 +1,4 @@
-use std::collections::{HashMap};
+use std::collections::HashMap;
 
 use file_reader::get_map;
 
@@ -86,24 +86,23 @@ fn find_pools(map: &Vec<Vec<u8>>) -> HashMap<(i32, i32), u32> {
     }
     hash_map
 }
-    fn get_basin_product(map: &Vec<Vec<u8>>) -> i32 {
-        let pools = find_pools(&map);
-        let mut pool_sizes = HashMap::new();
-        pools.values().for_each(|value| {
-            let pool_size =  match pool_sizes.get(value) {
-                Some(v) => *v,
-                None => 0  
-            };
-            pool_sizes.insert(value, pool_size + 1);
-        });
+fn get_basin_product(map: &Vec<Vec<u8>>) -> i32 {
+    let pools = find_pools(&map);
+    let mut pool_sizes = HashMap::new();
+    pools.values().for_each(|value| {
+        let pool_size = match pool_sizes.get(value) {
+            Some(v) => *v,
+            None => 0,
+        };
+        pool_sizes.insert(value, pool_size + 1);
+    });
 
-        let mut values = pool_sizes.values().collect::<Vec<&i32>>();
-        values.sort();
-        values.reverse();
+    let mut values = pool_sizes.values().collect::<Vec<&i32>>();
+    values.sort();
+    values.reverse();
 
-        return values[0] * values[1] * values[2];
-    }
-
+    return values[0] * values[1] * values[2];
+}
 
 pub fn day9() {
     let map = get_map("data/map.txt");

@@ -1,4 +1,5 @@
 use file_reader::get_nums;
+
 // Revision to be less iterative
 fn count_increases(nums: &Vec<i64>) -> usize {
     let range = 0..nums.len() - 1;
@@ -21,12 +22,18 @@ fn count_window_increases(nums: &Vec<i64>) -> usize {
     count_increases(&transformed)
 }
 
-pub fn day1() {
+pub fn part1() -> usize {
     let nums = get_nums("data/nums.txt");
     let increases = count_increases(&nums);
     assert!(increases == 1616);
+    increases
+}
+
+pub fn part2() -> usize {
+    let nums = get_nums("data/nums.txt");
     let window_increases = count_window_increases(&nums);
     assert!(window_increases == 1645);
+    window_increases
 }
 
 #[cfg(test)]

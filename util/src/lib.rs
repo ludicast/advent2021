@@ -1,3 +1,4 @@
+use std::fmt::Debug;
 use std::fs::File;
 use std::io::{self, BufRead};
 
@@ -17,11 +18,8 @@ pub fn parse_lines<T>(filename: &str, func: fn(&String) -> T) -> Vec<T> {
     lines.iter().map(func).collect()
 }
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        let result = 2 + 2;
-        assert_eq!(result, 4);
-    }
+pub fn display_results<T: Debug, U: Debug>(question: i8, part_1: T, part_2: U) {
+    println!("Question #{}", question);
+    println!("\tPart #1: {:#?}", part_1);
+    println!("\tPart #2: {:#?}", part_2);
 }

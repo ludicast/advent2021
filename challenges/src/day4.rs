@@ -27,9 +27,11 @@ fn get_last_bingo_winner(bingos: BingoGame) -> i64 {
     return -1;
 }
 
-pub fn day4_part2() {
+pub fn part2() -> i64 {
     let bingos = get_bingos("data/bingos.txt");
-    get_last_bingo_winner(bingos);
+    let winner = get_last_bingo_winner(bingos);
+    assert_eq!(winner, 20774);
+    winner
 }
 
 fn get_bingo_winner(bingos: BingoGame) -> i64 {
@@ -38,7 +40,7 @@ fn get_bingo_winner(bingos: BingoGame) -> i64 {
         ball_sack.insert(ball);
         for board in &bingos.boards {
             if board.has_bingo(ball_sack) {
-                let (v1, v2) = board.matched(ball_sack);
+                let (_v1, v2) = board.matched(ball_sack);
                 return v2.iter().sum::<i64>() * ball;
             }
         }
@@ -46,14 +48,11 @@ fn get_bingo_winner(bingos: BingoGame) -> i64 {
     return -1;
 }
 
-pub fn day4_part1() {
+pub fn part1() -> i64 {
     let bingos = get_bingos("data/bingos.txt");
-    get_bingo_winner(bingos);
-}
-
-pub fn day4() {
-    day4_part1();
-    day4_part2();
+    let winner = get_bingo_winner(bingos);
+    assert_eq!(winner, 82440);
+    winner
 }
 
 #[cfg(test)]

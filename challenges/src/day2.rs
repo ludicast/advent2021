@@ -24,10 +24,20 @@ fn aimed_location_position(moves: &Vec<(String, i64)>) -> (i64, i64, i64) {
     )
 }
 
-pub fn day2() {
+pub fn part1() -> i64 {
     let directions = get_directions("data/directions.txt");
     let (x_coord, y_coord) = location_position(&directions);
-    let (x_coord, y_coord, aim) = aimed_location_position(&directions);
+    let product = x_coord * y_coord;
+    assert_eq!(product, 1480518);
+    product
+}
+
+pub fn part2() -> i64 {
+    let directions = get_directions("data/directions.txt");
+    let (x_coord, y_coord, _aim) = aimed_location_position(&directions);
+    let product = x_coord * y_coord;
+    assert_eq!(product, 1282809906);
+    product
 }
 
 #[cfg(test)]
