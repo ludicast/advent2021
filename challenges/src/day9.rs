@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use file_reader::get_map;
 
-fn is_lowpoint(map: &Vec<Vec<u8>>, row_idx: usize, col_idx: usize) -> Option<u8> {
+fn is_lowpoint(map: &[Vec<u8>], row_idx: usize, col_idx: usize) -> Option<u8> {
     let value = map[row_idx][col_idx];
     let last_row = map.len() - 1;
     let last_col = map[0].len() - 1;
@@ -22,7 +22,7 @@ fn is_lowpoint(map: &Vec<Vec<u8>>, row_idx: usize, col_idx: usize) -> Option<u8>
     Some(value)
 }
 
-fn collect_lowpoints(map: &Vec<Vec<u8>>) -> Vec<u8> {
+fn collect_lowpoints(map: &[Vec<u8>]) -> Vec<u8> {
     let row_count = map.len();
     let col_count = map[0].len();
     let mut lowpoints = vec![];
@@ -36,7 +36,7 @@ fn collect_lowpoints(map: &Vec<Vec<u8>>) -> Vec<u8> {
     lowpoints
 }
 
-fn sum_risk_levels(map: &Vec<Vec<u8>>) -> u64 {
+fn sum_risk_levels(map: &[Vec<u8>]) -> u64 {
     collect_lowpoints(map)
         .iter()
         .map(|val| *val as u64 + 1)
@@ -44,7 +44,7 @@ fn sum_risk_levels(map: &Vec<Vec<u8>>) -> u64 {
 }
 
 fn follow_pool(
-    map: &Vec<Vec<u8>>,
+    map: &[Vec<u8>],
     pool_map: &mut HashMap<(i32, i32), u32>,
     pool_num: u32,
     row: i32,
@@ -69,7 +69,7 @@ fn follow_pool(
     follow_pool(map, pool_map, pool_num, row, col + 1);
 }
 
-fn find_pools(map: &Vec<Vec<u8>>) -> HashMap<(i32, i32), u32> {
+fn find_pools(map: &[Vec<u8>]) -> HashMap<(i32, i32), u32> {
     let mut hash_map = HashMap::new();
     let mut pool_num = 0;
 
@@ -86,8 +86,8 @@ fn find_pools(map: &Vec<Vec<u8>>) -> HashMap<(i32, i32), u32> {
     }
     hash_map
 }
-fn get_basin_product(map: &Vec<Vec<u8>>) -> i32 {
-    let pools = find_pools(&map);
+fn get_basin_product(map: &[Vec<u8>]) -> i32 {
+    let pools = find_pools(map);
     let mut pool_sizes = HashMap::new();
     pools.values().for_each(|value| {
         let pool_size = match pool_sizes.get(value) {
@@ -101,7 +101,7 @@ fn get_basin_product(map: &Vec<Vec<u8>>) -> i32 {
     values.sort();
     values.reverse();
 
-    return values[0] * values[1] * values[2];
+    values[0] * values[1] * values[2]
 }
 
 pub fn part1() -> u64 {

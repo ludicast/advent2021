@@ -17,14 +17,15 @@ fn get_last_bingo_winner(bingos: BingoGame) -> i64 {
             let board = &bingos.boards[i];
             if board.has_bingo(ball_sack) {
                 if old_wins.len() == len - 1 {
-                    let (v1, v2) = board.matched(ball_sack);
+                    let (_v1, v2) = board.matched(ball_sack);
                     return v2.iter().sum::<i64>() * ball;
                 }
                 old_wins.insert(i);
             }
         }
     }
-    return -1;
+
+    -1
 }
 
 pub fn part2() -> i64 {
@@ -45,7 +46,8 @@ fn get_bingo_winner(bingos: BingoGame) -> i64 {
             }
         }
     }
-    return -1;
+
+    -1
 }
 
 pub fn part1() -> i64 {

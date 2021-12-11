@@ -9,12 +9,11 @@ fn display_to_digits(display: &SevenSegmentDisplay) -> Vec<Vec<char>> {
 }
 
 fn count_unique_numbers(displays: Vec<SevenSegmentDisplay>) -> usize {
-    let unique_digits: Vec<Vec<char>> = displays
+    displays
         .iter()
         .flat_map(|display| display_to_digits(display))
-        .filter(|digit| [2 as usize, 3 as usize, 4 as usize, 7 as usize].contains(&digit.len()))
-        .collect();
-    unique_digits.len()
+        .filter(|digit| [2_usize, 3_usize, 4_usize, 7_usize].contains(&digit.len()))
+        .count()
 }
 
 pub fn part1() -> usize {

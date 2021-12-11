@@ -33,12 +33,11 @@ mod tests {
         let count = super::calculate_lanternfish(lanterns, 80);
         assert_eq!(count, 5934);
     }
-    
+
     #[test]
     fn calculate_lanternfish_after_256() {
         let lanterns = super::get_lanterns("../fixtures/lanterns.txt");
         let count = super::calculate_lanternfish(lanterns, 256);
         assert_eq!(count, 26984457539);
     }
-    
 }

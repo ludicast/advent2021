@@ -21,7 +21,7 @@ pub fn count_intersection_points(vent_lines: Vec<Line>, f: &dyn Fn(&Line) -> Vec
             count += 1;
         }
     }
-    return count;
+    count
     /*
     let increases = count_increases(&nums);
     assert!(increases == 1616);

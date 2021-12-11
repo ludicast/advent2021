@@ -3,19 +3,15 @@ use file_reader::get_nums;
 // Revision to be less iterative
 fn count_increases(nums: &Vec<i64>) -> usize {
     let range = 0..nums.len() - 1;
-    
-    range.filter(
-            |&i| nums[i] < nums[i + 1]
-        )
-        .count()
+    range.filter(|&i| nums[i] < nums[i + 1]).count()
 }
 
 // Revision to be less iterative and more dry
 fn count_window_increases(nums: &Vec<i64>) -> usize {
-    let transformed = nums.windows(3).map(|window|
-        window.iter().sum()
-    ).collect::<Vec<i64>>();
-
+    let transformed = nums
+        .windows(3)
+        .map(|window| window.iter().sum())
+        .collect::<Vec<i64>>();
     count_increases(&transformed)
 }
 
