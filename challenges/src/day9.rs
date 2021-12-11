@@ -104,10 +104,18 @@ fn get_basin_product(map: &Vec<Vec<u8>>) -> i32 {
     return values[0] * values[1] * values[2];
 }
 
-pub fn day9() {
+pub fn part1() -> u64 {
     let map = get_map("data/map.txt");
-    println!("sum risk: {}", sum_risk_levels(&map));
-    println!("basin_product: {}", get_basin_product(&map));
+    let risk_levels = sum_risk_levels(&map);
+    assert_eq!(risk_levels, 465);
+    risk_levels
+}
+
+pub fn part2() -> i32 {
+    let map = get_map("data/map.txt");
+    let basin_product = get_basin_product(&map);
+    assert_eq!(basin_product, 1269555);
+    basin_product
 }
 
 #[cfg(test)]

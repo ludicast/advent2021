@@ -17,9 +17,11 @@ fn count_unique_numbers(displays: Vec<SevenSegmentDisplay>) -> usize {
     unique_digits.len()
 }
 
-pub fn day8() {
+pub fn part1() -> usize {
     let displays = get_seven_segment_displays("./data/seven-segment-displays.txt");
-    count_unique_numbers(displays);
+    let unique_numbers = count_unique_numbers(displays);
+    assert_eq!(unique_numbers, 383);
+    unique_numbers
 }
 
 #[cfg(test)]

@@ -23,3 +23,7 @@ pub fn display_results<T: Debug, U: Debug>(question: i8, part_1: T, part_2: U) {
     println!("\tPart #1: {:#?}", part_1);
     println!("\tPart #2: {:#?}", part_2);
 }
+
+pub fn display_partial_results<T: Debug>(question: i8, part_1: T) {
+    display_results(question, part_1, "STILL WORKING ON PART")
+}
