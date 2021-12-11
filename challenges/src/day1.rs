@@ -12,10 +12,10 @@ fn count_increases(nums: &Vec<i64>) -> usize {
 
 // Revision to be less iterative and more dry
 fn count_window_increases(nums: &Vec<i64>) -> usize {
-    let range = 0..nums.len() - 2;
-    let transformed: Vec<i64> = range
-        .map(|i| nums[i] + nums[i + 1] + nums[i + 2])
-        .collect::<Vec<i64>>();
+    let transformed = nums.windows(3).map(|window|
+        window.iter().sum()
+    ).collect::<Vec<i64>>();
+
     count_increases(&transformed)
 }
 
