@@ -1,4 +1,4 @@
-use util::{display_results};
+use util::display_results;
 
 mod day1;
 mod day2;

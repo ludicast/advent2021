@@ -50,19 +50,11 @@ impl Board {
 
         let matched_cells = values
             .iter()
-            .flat_map(|row| {
-                row.iter()
-                    .filter(|cell| nums.contains(cell))
-                    .copied()
-            })
+            .flat_map(|row| row.iter().filter(|cell| nums.contains(cell)).copied())
             .collect::<Vec<i64>>();
         let non_matched_cells = values
             .iter()
-            .flat_map(|row| {
-                row.iter()
-                    .filter(|cell| !nums.contains(cell))
-                    .copied()
-            })
+            .flat_map(|row| row.iter().filter(|cell| !nums.contains(cell)).copied())
             .collect::<Vec<i64>>();
         (matched_cells, non_matched_cells)
     }
