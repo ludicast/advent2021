@@ -26,3 +26,4 @@ pub fn get_seven_segment_display(line: &String) -> SevenSegmentDisplay {
 pub fn get_seven_segment_displays(filename: &str) -> Vec<SevenSegmentDisplay> {
     parse_lines(filename, get_seven_segment_display)
 }
+
