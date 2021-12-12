@@ -10,7 +10,7 @@ pub struct SevenSegmentDisplay {
     pub digits: Vec<SevenSegmentDigit>,
 }
 
-pub fn get_seven_segment_display(line: &String) -> SevenSegmentDisplay {
+pub fn get_seven_segment_display(line: &str) -> SevenSegmentDisplay {
     let split = line.split(" | ");
     let vec: Vec<&str> = split.collect();
     let digits = vec[1]

@@ -13,9 +13,9 @@ pub fn read_lines(filename: &str) -> Vec<String> {
         .collect::<Vec<String>>()
 }
 
-pub fn parse_lines<T>(filename: &str, func: fn(&String) -> T) -> Vec<T> {
+pub fn parse_lines<T>(filename: &str, func: fn(&str) -> T) -> Vec<T> {
     let lines = read_lines(filename);
-    lines.iter().map(func).collect()
+    lines.iter().map(|s| func(s.as_str())).collect()
 }
 
 pub fn display_results<T: Debug, U: Debug>(question: i8, part_1: T, part_2: U) {
