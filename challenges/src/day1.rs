@@ -1,7 +1,7 @@
 use file_reader::get_nums;
 
 // Revision to be less iterative
-fn count_increases(nums: &Vec<i64>) -> usize {
+fn count_increases(nums: &[i64]) -> usize {
     let range = 0..nums.len() - 1;
     range.filter(|&i| nums[i] < nums[i + 1]).count()
 }

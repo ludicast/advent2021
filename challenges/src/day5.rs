@@ -6,7 +6,7 @@ pub fn count_intersection_points(vent_lines: Vec<Line>, f: &dyn Fn(&Line) -> Vec
     let points = vent_lines.iter().flat_map(f).collect::<Vec<Point>>();
 
     for point in points {
-        if let Some(value) = point_counter.get(&point.hash()) {
+        if let Some(&value) = &point_counter.get(&point.hash()) {
             point_counter.insert(point.hash(), value + 1);
         } else {
             point_counter.insert(point.hash(), 1);

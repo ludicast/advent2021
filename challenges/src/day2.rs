@@ -1,6 +1,6 @@
 use file_reader::get_directions;
 
-fn location_position(moves: &Vec<(String, i64)>) -> (i64, i64) {
+fn location_position(moves: &[(String, i64)]) -> (i64, i64) {
     moves.iter().fold(
         (0, 0),
         |(x_coord, y_coord), (direction, magnitude)| match direction.as_str() {
@@ -12,7 +12,7 @@ fn location_position(moves: &Vec<(String, i64)>) -> (i64, i64) {
     )
 }
 
-fn aimed_location_position(moves: &Vec<(String, i64)>) -> (i64, i64, i64) {
+fn aimed_location_position(moves: &[(String, i64)]) -> (i64, i64, i64) {
     moves.iter().fold(
         (0, 0, 0),
         |(x_coord, y_coord, aim), (direction, magnitude)| match direction.as_str() {

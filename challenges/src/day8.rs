@@ -1,4 +1,4 @@
-use file_reader::{get_seven_segment_display, get_seven_segment_displays, SevenSegmentDisplay};
+use file_reader::{get_seven_segment_displays, SevenSegmentDisplay};
 
 fn display_to_digits(display: &SevenSegmentDisplay) -> Vec<Vec<char>> {
     display
@@ -31,14 +31,5 @@ mod tests {
         let displays = super::get_seven_segment_displays("../fixtures/seven-segment-displays.txt");
         let unique_numbers = super::count_unique_numbers(displays);
         assert_eq!(unique_numbers, 26);
-    }
-
-    #[test]
-    fn test_get_unique_value() {
-        let words = "be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe";
-        let display = super::get_seven_segment_display(&String::from(words));
-        let digits = super::display_to_digits(&display);
-        assert_eq!(digits.len(), 4);
-        assert_eq!(digits[0], "fdgacbe".chars().collect::<Vec<char>>());
     }
 }
