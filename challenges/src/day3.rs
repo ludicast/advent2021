@@ -11,12 +11,10 @@ fn most_common(nums: &Vec<Vec<u32>>, col_num: usize, gamma: bool) -> u32 {
         } else {
             0
         }
+    } else if gamma {
+        0
     } else {
-        if gamma {
-            0
-        } else {
-            1
-        }
+        1
     }
 }
 
