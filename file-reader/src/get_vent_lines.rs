@@ -92,7 +92,7 @@ impl Line {
 }
 
 pub fn set_to_point(point_string: &str) -> Point {
-    let split = point_string.split(",");
+    let split = point_string.split(',');
     let point_nums = split
         .map(|num_as_str| i64::from_str_radix(num_as_str, 10).unwrap())
         .collect::<Vec<i64>>();

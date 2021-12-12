@@ -7,7 +7,7 @@ fn count_increases(nums: &[i64]) -> usize {
 }
 
 // Revision to be less iterative and more dry
-fn count_window_increases(nums: &Vec<i64>) -> usize {
+fn count_window_increases(nums: &[i64]) -> usize {
     let transformed = nums
         .windows(3)
         .map(|window| window.iter().sum())

@@ -76,7 +76,7 @@ pub struct BingoGame {
 pub fn get_bingos(filename: &str) -> BingoGame {
     let lines = read_lines(filename);
     let balls = lines[0]
-        .split(",")
+        .split(',')
         .map(|num| num.parse::<i64>().unwrap())
         .collect::<Vec<i64>>();
     let games_count = (lines.len() - 1) / 6;
@@ -87,9 +87,9 @@ pub fn get_bingos(filename: &str) -> BingoGame {
             let values = (start..start + 5)
                 .map(|row_num| {
                     lines[row_num]
-                        .split(" ")
+                        .split(' ')
                         // some spots are double-spaced, but regex is a 3rd party util
-                        .filter(|piece| *piece != "")
+                        .filter(|&piece| !piece.is_empty())
                         .map(|num_string| i64::from_str_radix(num_string, 10).unwrap())
                         .collect::<Vec<i64>>()
                 })

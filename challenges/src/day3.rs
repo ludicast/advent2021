@@ -1,6 +1,6 @@
 use file_reader::get_binaries;
 
-fn most_common(nums: &Vec<Vec<u32>>, col_num: usize, gamma: bool) -> u32 {
+fn most_common(nums: &[Vec<u32>], col_num: usize, gamma: bool) -> u32 {
     let rows: u32 = nums.len().try_into().unwrap();
     let low_floor = rows / 2;
     let floor = rows - low_floor;
@@ -18,11 +18,11 @@ fn most_common(nums: &Vec<Vec<u32>>, col_num: usize, gamma: bool) -> u32 {
     }
 }
 
-fn generate_new_num(nums: &Vec<Vec<u32>>, gamma: bool) -> u64 {
+fn generate_new_num(nums: &[Vec<u32>], gamma: bool) -> u64 {
     let columns = nums[0].len();
     let mut bit_string = String::from("");
     for col_num in 0..columns {
-        let bit_int = most_common(&nums, col_num, gamma);
+        let bit_int = most_common(nums, col_num, gamma);
         let bit_char = match bit_int {
             1 => '1',
             _ => '0',
@@ -32,10 +32,10 @@ fn generate_new_num(nums: &Vec<Vec<u32>>, gamma: bool) -> u64 {
     return u64::from_str_radix(bit_string.as_str(), 2).unwrap();
 }
 
-fn generate_winning_num(nums: &Vec<Vec<u32>>, gamma: bool) -> u64 {
-    let columns = nums[0].len();
+fn generate_winning_num(boards: &[Vec<u32>], gamma: bool) -> u64 {
+    let columns = boards[0].len();
     // let mut bit_string = String::from("");
-    let mut nums: Vec<Vec<u32>> = nums.clone();
+    let mut nums = boards.to_vec();
     for col_num in 0..columns {
         let common = most_common(&nums, col_num, gamma);
         nums.retain(|row| row[col_num] == common);

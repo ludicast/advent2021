@@ -14,7 +14,7 @@ pub fn get_seven_segment_display(line: &String) -> SevenSegmentDisplay {
     let split = line.split(" | ");
     let vec: Vec<&str> = split.collect();
     let digits = vec[1]
-        .split(" ")
+        .split(' ')
         .map(|digit| SevenSegmentDigit {
             chars: digit.chars().collect(),
         })
