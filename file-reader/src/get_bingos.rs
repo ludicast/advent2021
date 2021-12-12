@@ -53,7 +53,7 @@ impl Board {
             .flat_map(|row| {
                 row.iter()
                     .filter(|cell| nums.contains(cell))
-                    .map(|cell| *cell)
+                    .copied()
             })
             .collect::<Vec<i64>>();
         let non_matched_cells = values
@@ -61,7 +61,7 @@ impl Board {
             .flat_map(|row| {
                 row.iter()
                     .filter(|cell| !nums.contains(cell))
-                    .map(|cell| *cell)
+                    .copied()
             })
             .collect::<Vec<i64>>();
         (matched_cells, non_matched_cells)
@@ -90,7 +90,7 @@ pub fn get_bingos(filename: &str) -> BingoGame {
                         .split(' ')
                         // some spots are double-spaced, but regex is a 3rd party util
                         .filter(|&piece| !piece.is_empty())
-                        .map(|num_string| i64::from_str_radix(num_string, 10).unwrap())
+                        .map(|num_string| num_string.parse().unwrap())
                         .collect::<Vec<i64>>()
                 })
                 .collect::<Vec<Vec<i64>>>();

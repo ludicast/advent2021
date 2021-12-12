@@ -4,7 +4,7 @@ pub fn get_parsed_nums(filename: &str) -> Vec<i64> {
     let lines = read_lines(filename);
     lines[0]
         .split(',')
-        .map(|num_string| i64::from_str_radix(num_string, 10).unwrap())
+        .map(|num_string| num_string.parse().unwrap())
         .collect::<Vec<i64>>()
 }
 
