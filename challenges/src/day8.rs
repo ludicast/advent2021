@@ -1,4 +1,4 @@
-use std::{collections::HashSet, panic};
+use std::collections::HashSet;
 
 use file_reader::{get_seven_segment_displays, SevenSegmentDisplay};
 
@@ -60,12 +60,9 @@ fn calculate_inputs(display: &SevenSegmentDisplay) -> [HashSet<char>; 10] {
 }
 
 fn get_value(inputs: &[HashSet<char>; 10], digit: &HashSet<char>) -> usize {
-    for idx in 0..inputs.len() {
-        if inputs[idx].is_subset(&digit) && inputs[idx].is_superset(&digit) {
-            return idx;
-        }
-    }
-    panic!("no index found");
+    (0..10).find(|&idx| {
+        inputs[idx].is_subset(digit) && inputs[idx].is_superset(digit)
+    }).unwrap()
 }
 fn count_unique_numbers(displays: Vec<SevenSegmentDisplay>) -> usize {
     let digit_map = displays
@@ -97,7 +94,6 @@ fn sum_numbers(displays: Vec<SevenSegmentDisplay>) -> i32 {
         let res = digits[0] * 1000 + digits[1] * 100 + digits[2] * 10 + digits[3];
         res as i32
     });
-    println!("ds {:?} {:?}", displays, vals);
     vals.sum::<i32>()
 }
 

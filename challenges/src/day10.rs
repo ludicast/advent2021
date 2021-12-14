@@ -58,7 +58,7 @@ fn calculate_incompleteness_score(nums: &[Vec<char>]) -> i64 {
         .iter()
         .filter_map(|chars| score_of_line(chars).ok())
         .collect::<Vec<i64>>();
-    scores.sort();
+    scores.sort_unstable();
     scores[scores.len() / 2]
 }
 
