@@ -8,9 +8,7 @@ pub fn get_octopuses(filename: &str) -> [[u8; 10]; 10] {
             .map(|n| n.parse().unwrap())
             .collect::<Vec<u8>>();
         let mut array_of_nums: [u8; 10] = Default::default();
-        for i in 0..10 {
-            array_of_nums[i] = num_chars[i];
-        }
+        array_of_nums[..10].clone_from_slice(&num_chars[..10]);
         array_of_nums
     });
     let mut result: [[u8; 10]; 10] = Default::default();
