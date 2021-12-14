@@ -22,6 +22,9 @@ pub use get_comma_separated_numbers::{get_lanterns, get_parsed_nums};
 mod get_vent_lines;
 pub use get_vent_lines::{get_vent_lines, Line, Point};
 
+mod get_octopuses;
+pub use get_octopuses::get_octopuses;
+
 mod get_seven_segment_displays;
 pub use get_seven_segment_displays::{
     get_seven_segment_display, get_seven_segment_displays, SevenSegmentDisplay,

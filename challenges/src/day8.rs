@@ -60,9 +60,9 @@ fn calculate_inputs(display: &SevenSegmentDisplay) -> [HashSet<char>; 10] {
 }
 
 fn get_value(inputs: &[HashSet<char>; 10], digit: &HashSet<char>) -> usize {
-    (0..10).find(|&idx| {
-        inputs[idx].is_subset(digit) && inputs[idx].is_superset(digit)
-    }).unwrap()
+    (0..10)
+        .find(|&idx| inputs[idx].is_subset(digit) && inputs[idx].is_superset(digit))
+        .unwrap()
 }
 fn count_unique_numbers(displays: Vec<SevenSegmentDisplay>) -> usize {
     let digit_map = displays
