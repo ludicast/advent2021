@@ -1,75 +1,104 @@
-use std::collections::HashSet;
+use std::{collections::HashSet, panic};
 
 use file_reader::{get_seven_segment_displays, SevenSegmentDisplay};
 
-fn calculate_inputs(display: &SevenSegmentDisplay) {
-    /*
+fn calculate_inputs(display: &SevenSegmentDisplay) -> [HashSet<char>; 10] {
     let mut definitions: [HashSet<char>; 10] = Default::default();
 
     let mut unknown = vec![];
-    for possible in display.input.iter() {
-        let chars = &possible.chars;
-        let char_set = HashSet::from_iter(chars.clone());
+    for chars in display.input.iter() {
         match chars.len() {
             2 => {
-               definitions[1] = char_set;
-            },
+                definitions[1] = chars.clone();
+            }
             3 => {
-               definitions[7] = char_set;
-            },
+                definitions[7] = chars.clone();
+            }
             4 => {
-               definitions[4] = char_set;
-            },
+                definitions[4] = chars.clone();
+            }
             7 => {
-               definitions[8] = char_set;
-            },
+                definitions[8] = chars.clone();
+            }
             _ => {
-                unknown.push(possible);
+                unknown.push(chars);
             }
         }
     }
-    println!("{:#?}", definitions);
-    unknown.retain(|obj| obj.chars.len() != 6);
-    println!("{:#?}", unknown);
-    1 4 7 8
 
-    5 chars
-    3 (contains 1)
-    2 (not ccntained by 9)
-    5 (not 3 contained by 9)
-
-    6 chars
-    ********
-    9 (contains 3) (contains intersection of 4 and 7)
-    0 (contains 7, does not contain 3)
-    6 (contains 5)
-    let three = unknown.iter().find(|i| {
-        let chars = i.chars;
-        let hash_set = HashSet<char>::from_iter(i.chars.clone());
-        true
-    }).unwrap();
-
-    */
-    // let four_and_seven = definitions[4].union(&definitions[7]); //.collect::<HashSet<char>>();
-
-    // .union(&definitions[3]);
-    /*
-        for opt in unknown {
-
-            if opt.chars.len() == 5 {
-               println!("foive");
-            }
-
-        }
-    */
+    let &three = unknown
+        .iter()
+        .find(|&&i| i.len() == 5 && i.is_superset(&definitions[1]))
+        .unwrap();
+    definitions[3] = three.clone();
+    let &nine = unknown
+        .iter()
+        .find(|&&i| i.len() == 6 && i.is_superset(&definitions[3]))
+        .unwrap();
+    definitions[9] = nine.clone();
+    let &five = unknown
+        .iter()
+        .find(|&&i| i.len() == 5 && i.is_subset(&definitions[9]) && !i.is_superset(&definitions[1]))
+        .unwrap();
+    definitions[5] = five.clone();
+    let &two = unknown
+        .iter()
+        .find(|&&i| i.len() == 5 && !i.is_subset(&definitions[9]))
+        .unwrap();
+    definitions[2] = two.clone();
+    let &six = unknown
+        .iter()
+        .find(|&&i| i.len() == 6 && !i.is_superset(&definitions[1]))
+        .unwrap();
+    definitions[6] = six.clone();
+    let &zero = unknown
+        .iter()
+        .find(|&&i| i.len() == 6 && definitions.iter().all(|definition| definition != i))
+        .unwrap();
+    definitions[0] = zero.clone();
+    definitions
 }
 
+fn get_value(inputs: &[HashSet<char>; 10], digit: &HashSet<char>) -> usize {
+    for idx in 0..inputs.len() {
+        if inputs[idx].is_subset(&digit) && inputs[idx].is_superset(&digit) {
+            return idx;
+        }
+    }
+    panic!("no index found");
+}
 fn count_unique_numbers(displays: Vec<SevenSegmentDisplay>) -> usize {
-    displays
+    let digit_map = displays
         .iter()
-        .flat_map(|display| &display.output)
-        .filter(|digit| [2_usize, 3_usize, 4_usize, 7_usize].contains(&digit.len()))
+        .map(|display| {
+            let inputs = &calculate_inputs(display);
+            display
+                .output
+                .iter()
+                .map(|digit| get_value(inputs, digit))
+                .collect()
+        })
+        .collect::<Vec<Vec<usize>>>();
+    digit_map
+        .iter()
+        .flatten()
+        .filter(|i| [1_usize, 4_usize, 7_usize, 8_usize].contains(i))
         .count()
+}
+
+fn sum_numbers(displays: Vec<SevenSegmentDisplay>) -> i32 {
+    let vals = displays.iter().map(|display| {
+        let inputs = &calculate_inputs(display);
+        let digits = display
+            .output
+            .iter()
+            .map(|digit| get_value(inputs, digit))
+            .collect::<Vec<usize>>();
+        let res = digits[0] * 1000 + digits[1] * 100 + digits[2] * 10 + digits[3];
+        res as i32
+    });
+    println!("ds {:?} {:?}", displays, vals);
+    vals.sum::<i32>()
 }
 
 pub fn part1() -> usize {
@@ -79,12 +108,11 @@ pub fn part1() -> usize {
     unique_numbers
 }
 
-pub fn part2() -> usize {
+pub fn part2() -> i32 {
     let displays = get_seven_segment_displays("./data/seven-segment-displays.txt");
-    // calculate_inputs(&displays[0]);
-    let unique_numbers = count_unique_numbers(displays);
-    assert_eq!(unique_numbers, 383);
-    unique_numbers
+    let summed_numbers = sum_numbers(displays);
+    assert_eq!(summed_numbers, 998900);
+    summed_numbers
 }
 
 #[cfg(test)]
@@ -94,6 +122,13 @@ mod tests {
         let displays = super::get_seven_segment_displays("../fixtures/seven-segment-displays.txt");
         let unique_numbers = super::count_unique_numbers(displays);
         assert_eq!(unique_numbers, 26);
+    }
+
+    #[test]
+    fn test_sum_numbers() {
+        let displays = super::get_seven_segment_displays("../fixtures/seven-segment-displays.txt");
+        let summed_numbers = super::sum_numbers(displays);
+        assert_eq!(summed_numbers, 61229);
     }
 
     #[test]

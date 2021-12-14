@@ -13,6 +13,9 @@ pub use get_binaries::get_binaries;
 mod get_map;
 pub use get_map::get_map;
 
+mod get_braces;
+pub use get_braces::get_braces;
+
 mod get_comma_separated_numbers;
 pub use get_comma_separated_numbers::{get_lanterns, get_parsed_nums};
 
