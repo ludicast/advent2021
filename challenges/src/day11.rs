@@ -54,21 +54,20 @@ fn trigger_flashes(octopuses: &mut [[u32; 10]; 10]) -> u32 {
             }
         }
     }
-    return flashes;
+    flashes
 }
 
 fn bump_all(octopuses: &mut [[u32; 10]; 10]) {
-    for row in 0..10 {
-        for col in 0..10 {
-            octopuses[row][col] += 1;
+    for row in octopuses.iter_mut().take(10) {
+        for octopus in row.iter_mut().take(10) {
+            *octopus += 1;
         }
     }
 }
 
 fn take_step(octopuses: &mut [[u32; 10]; 10]) -> u32 {
     bump_all(octopuses);
-    let flashes = trigger_flashes(octopuses);
-    flashes
+    trigger_flashes(octopuses)
 }
 
 fn take_steps(octopuses: &mut [[u32; 10]; 10], count: usize) -> u32 {
@@ -124,14 +123,14 @@ mod tests {
     #[test]
     fn test_take_steps() {
         let mut octopuses = super::get_octopuses("../fixtures/octopuses.txt");
-        let mut flashes = super::take_steps(&mut octopuses, 10);
+        let flashes = super::take_steps(&mut octopuses, 10);
         assert_eq!(flashes, 204);
     }
 
     #[test]
     fn test_take_many_steps() {
         let mut octopuses = super::get_octopuses("../fixtures/octopuses.txt");
-        let mut flashes = super::take_steps(&mut octopuses, 100);
+        let flashes = super::take_steps(&mut octopuses, 100);
         assert_eq!(flashes, 1656);
     }
 
