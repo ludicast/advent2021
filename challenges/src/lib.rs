@@ -1,4 +1,4 @@
-use util::{display_partial_results, display_results};
+use util::display_results;
 
 mod day1;
 mod day10;
@@ -23,5 +23,5 @@ pub fn run_challenges() {
     display_results(8, day8::part1(), day8::part2());
     display_results(9, day9::part1(), day9::part2());
     display_results(10, day10::part1(), day10::part2());
-    display_partial_results(11, day11::part1());
+    display_results(11, day11::part1(), day11::part2());
 }

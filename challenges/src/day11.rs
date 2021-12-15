@@ -37,7 +37,7 @@ fn trigger_flashes(octopuses: &mut [[u32; 10]; 10]) -> u32 {
 
         for row in 0..10 {
             for col in 0..10 {
-                if octopuses[row][col] > 9 && ! recent_flashes[row][col]{
+                if octopuses[row][col] > 9 && !recent_flashes[row][col] {
                     recent_flashes[row][col] = true;
                     flashes += 1;
                     has_new_flashes = true;
@@ -72,20 +72,40 @@ fn take_step(octopuses: &mut [[u32; 10]; 10]) -> u32 {
 }
 
 fn take_steps(octopuses: &mut [[u32; 10]; 10], count: usize) -> u32 {
-    (0..count).fold(
-        0,
-        |acc, _| {
-            let flashes = take_step(octopuses);
-            acc + flashes
-        }
-    )
+    (0..count).fold(0, |acc, _| {
+        let flashes = take_step(octopuses);
+        acc + flashes
+    })
+}
+
+fn all_zeros(octopuses: &[[u32; 10]; 10]) -> bool {
+    let iter = octopuses.iter();
+    iter.map(|row: &[u32; 10]| row.iter().sum::<u32>())
+        .sum::<u32>()
+        == 0
+}
+
+fn get_first_flash(octopuses: &mut [[u32; 10]; 10]) -> u32 {
+    let mut first_flash = 0;
+    while !all_zeros(octopuses) {
+        take_step(octopuses);
+        first_flash += 1;
+    }
+    first_flash
 }
 
 pub fn part1() -> u32 {
     let mut octopuses = get_octopuses("data/octopuses.txt");
     let score = take_steps(&mut octopuses, 100);
-    assert_eq!(score, 358737);
+    assert_eq!(score, 1688);
     score
+}
+
+pub fn part2() -> u32 {
+    let mut octopuses = get_octopuses("data/octopuses.txt");
+    let first_flash = get_first_flash(&mut octopuses);
+    assert_eq!(first_flash, 403);
+    first_flash
 }
 
 #[cfg(test)]
@@ -113,5 +133,12 @@ mod tests {
         let mut octopuses = super::get_octopuses("../fixtures/octopuses.txt");
         let mut flashes = super::take_steps(&mut octopuses, 100);
         assert_eq!(flashes, 1656);
+    }
+
+    #[test]
+    fn test_get_first_flash() {
+        let mut octopuses = super::get_octopuses("../fixtures/octopuses.txt");
+        let first_flash = super::get_first_flash(&mut octopuses);
+        assert_eq!(first_flash, 195);
     }
 }
